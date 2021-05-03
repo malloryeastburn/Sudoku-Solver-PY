@@ -21,7 +21,7 @@ button_identities = []
 
 def select_number(num):
     global number
-    number = num +1
+    number = num + 1
     return
 def assign_number(i,j):
     if i == 0:
@@ -51,13 +51,25 @@ def clear_board():
         item.configure(text='')
     return
 def solve_board():
-
-    return
+    for index in range(len(button_identities)):
+        if button_identities[index]['text'] == '':
+            board[index//9][index%9] = 0
+        else:
+            board[index//9][index%9] = button_identities[index]['text']
+    #If solved, prints board, else: Display no solution
+    if solve(board) == True:
+        print("\nSolved:")
+        print_board(board)
+        for index in range(len(button_identities)):
+            text = board[index//9][index%9]
+            button_identities[index].configure(text=text)     
+    else:
+        print("\nNo solution")
+        return
 btn_empty = Button(root, text="Clear Board", font=fontStyle, width=12, height=1, relief="solid", command=clear_board)
 btn_solve = Button(root, text="Solve", font=fontStyle, width=12, height=1, relief="solid", command=solve_board)
 btn_empty.grid(row=len(board)+2, column=0, columnspan=4)
 btn_solve.grid(row=len(board)+2, column=5, columnspan=4)
-root.mainloop()
 
 #Backtracking function that solves the board. Calls itself when a solution is invalid until the board is solved
 def solve(board):
@@ -112,12 +124,8 @@ def find_empty(board):
     return None
 
 #Prints the board before it is solved
+
 print("Unsolved:")       
 print_board(board)
 
-#If solved, prints board, else: Display no solution
-if solve(board) == True:
-    print("\nSolved:")
-    print_board(board)
-else:
-    print("\nNo solution")
+root.mainloop()
