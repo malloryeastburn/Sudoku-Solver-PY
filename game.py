@@ -70,7 +70,6 @@ btn_empty = Button(root, text="Clear Board", font=fontStyle, width=12, height=1,
 btn_solve = Button(root, text="Solve", font=fontStyle, width=12, height=1, relief="solid", command=solve_board)
 btn_empty.grid(row=len(board)+2, column=0, columnspan=4)
 btn_solve.grid(row=len(board)+2, column=5, columnspan=4)
-
 #Backtracking function that solves the board. Calls itself when a solution is invalid until the board is solved
 def solve(board):
     find = find_empty(board)
@@ -85,7 +84,6 @@ def solve(board):
                 return True
             board[row][col] = 0
     return False
-
 #checks to see if a number is valid
 def valid(board, num, pos):
     for i in range(len(board[0])):
